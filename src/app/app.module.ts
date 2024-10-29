@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { NewsListComponent } from './components/news/news-list/news-list.component';
+import { NewsItemComponent } from './components/news/news-item/news-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NewsListComponent,
+    NewsItemComponent
   ],
   imports: [
     BrowserModule,
