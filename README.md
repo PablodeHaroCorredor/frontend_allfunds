@@ -8,7 +8,7 @@ El rol de admin permite ver tanto las noticias nuevas como las archivadas y la o
 
 Las credenciales son las siguientes:
 User role
-  username: user
+  username: user	
   password: password123
 
 Admin role
