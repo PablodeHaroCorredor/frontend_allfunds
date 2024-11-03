@@ -1,0 +1,126 @@
+<!-- src/app/news-view/news-view.component.html -->
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-center mb-4">Noticias Recientes</h2>
+
+    <!-- Botón para navegar a la vista de noticias -->
+    <button routerLink="/archived" class="btn btn-link">
+      Ver Noticias Archivadas
+    </button>
+  </div>
+
+  <button
+    class="btn btn-success mb-3"
+    data-bs-toggle="modal"
+    data-bs-target="#createNewsModal"
+    (click)="openCreateModal()"
+    *ngIf="userRole !== 'user'"
+  >
+    Crear Nueva Noticia
+  </button>
+
+  <div *ngFor="let news of newsList()" class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">{{ news.title }}</h5>
+      <p class="card-text">{{ news.description }}</p>
+      <p class="card-text">{{ news.author }}</p>
+      <p class="text-muted">
+        <small>Publicado el: {{ news.date | date }}</small>
+      </p>
+      <button class="btn btn-outline-primary" (click)="archive(news._id)">
+        Archivar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Crear Nueva Noticia -->
+<div
+  class="modal"
+  id="createModal"
+  tabindex="-1"
+  aria-labelledby="createNewsModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createNewsModalLabel">
+          Crear Nueva Noticia
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newsForm" (ngSubmit)="submitForm()">
+          <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input
+              type="text"
+              id="title"
+              class="form-control"
+              formControlName="title"
+              placeholder="Ingresa el título"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea
+              id="description"
+              class="form-control"
+              formControlName="description"
+              rows="3"
+              placeholder="Escribe la descripción de la noticia"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="content" class="form-label">Contenido</label>
+            <textarea
+              id="content"
+              class="form-control"
+              formControlName="content"
+              rows="3"
+              placeholder="Escribe el contenido de la noticia"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="author" class="form-label">Autor</label>
+            <input
+              type="text"
+              id="author"
+              class="form-control"
+              formControlName="author"
+              placeholder="Nombre del autor"
+              required
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              (click)="closeModal()"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!newsForm.valid"
+            >
+              Guardar Noticia
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

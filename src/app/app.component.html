@@ -1,0 +1,18 @@
+<!-- src/app/app.component.html -->
+<div class="container mt-3">
+  <div class="d-flex justify-content-end align-items-center">
+    <!-- Muestra el nombre de usuario y el rol del usuario logueado -->
+    <div *ngIf="userInfo" class="me-3">
+      <span>Bienvenido, {{ userInfo.username }} ({{ userInfo.role }})</span>
+    </div>
+    <!-- Botón de logout -->
+    <button
+      *ngIf="isLoggedIn()"
+      (click)="logout()"
+      class="btn btn-outline-secondary"
+    >
+      Cerrar Sesión
+    </button>
+  </div>
+  <router-outlet></router-outlet>
+</div>
